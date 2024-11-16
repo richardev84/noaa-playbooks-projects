@@ -1,0 +1,22 @@
+---
+- name: Install common packages
+  ansible.builtin.package:
+    name:
+      - vim
+      - curl
+      - git
+    state: present
+
+- name: Install packages for Red Hat-based systems
+  ansible.builtin.yum:
+    name:
+      - httpd
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Install packages for Debian-based systems
+  ansible.builtin.apt:
+    name:
+      - apache2
+    state: present
+  when: ansible_os_family == "Debian"

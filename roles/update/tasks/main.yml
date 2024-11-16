@@ -1,0 +1,12 @@
+---
+- name: Update packages for Red Hat-based systems
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  when: ansible_os_family == "RedHat"
+
+- name: Update packages for Debian-based systems
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: dist
+  when: ansible_os_family == "Debian"
